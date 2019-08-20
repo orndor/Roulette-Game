@@ -7,7 +7,7 @@ namespace Roulette_Game
     class RouletteWheel
     {
 
-        static public void Spin()
+        static public int Spin()
         {
             Dictionary<int, (string, string)> rouletteWheel = new Dictionary<int, (string, string)>
             {
@@ -57,6 +57,8 @@ namespace Roulette_Game
             var color = rouletteWheel[randomNumber].Item1;
             var number = rouletteWheel[randomNumber].Item2;
             Console.WriteLine($"The ball stopped on {color} {number}.");
+
+            return randomNumber;
         }
 
     }
