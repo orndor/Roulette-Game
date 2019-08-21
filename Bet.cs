@@ -30,8 +30,8 @@ namespace Roulette_Game
                 var intNumber = 0;
                 if (stringNumber == "00")
                 {
-                    intNumber = RouletteWheel.Spin();
-                    if (intNumber == 0)
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber == 37)
                     {
                         Console.WriteLine("You won!");
                     }
@@ -39,9 +39,9 @@ namespace Roulette_Game
 
                 else if (int.Parse(stringNumber) <= 36 && int.Parse(stringNumber) >= 0)
                 {
-                    intNumber = RouletteWheel.Spin();
+                    intNumber = RouletteWheel.Spin().Item1;
                     var number = int.Parse(stringNumber);
-                    if (intNumber == ++number)
+                    if (intNumber == number)
                     {
                         Console.WriteLine("You won!");
                     }
@@ -52,7 +52,7 @@ namespace Roulette_Game
                 }
                 else
                 {
-                    Console.WriteLine("blah Please enter a valid number between 00 and 36");
+                    Console.WriteLine("Please enter a valid number between 00 and 36");
                 }
             }
             catch
@@ -65,25 +65,204 @@ namespace Roulette_Game
             }
 
         }
-        public void EvensAndOddsBet()
+        static public void EvensAndOddsBet()
         {
             //Evens/Odds: even or odd numbers
+            try
+            {
+                Console.Write("Enter 1 to bet even; enter 2 to bet odd: ");
+                var stringNumber = Console.ReadLine();
+                var intNumber = 0;
+                if (stringNumber == "1")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber % 2 == 0)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
 
+                else if (stringNumber == "2")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber % 3 == 0)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter either 1 or 2.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter either 1 or 2.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
         }
-        public void RedsAndBlacksBet()
+        static public void RedsAndBlacksBet()
         {
             //Reds/Blacks: red or black colored numbers
+            try
+            {
+                Console.Write("Enter 1 to bet red; enter 2 to bet black: ");
+                var stringNumber = Console.ReadLine();
+                if (stringNumber == "1")
+                {
+                    var color = RouletteWheel.Spin().Item2;
+                    if (color == "Red")
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
 
+                else if (stringNumber == "2")
+                {
+                    var color = RouletteWheel.Spin().Item2;
+                    if (color == "Black")
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter either 1 or 2.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter either 1 or 2.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
         }
-        public void LowsAndHighsBet()
+        static public void LowsAndHighsBet()
         {
-            //Lows/Highs: low (1 – 18) or high (19 – 38) numbers.
+            //Lows/Highs: low (1 – 18) or high (19 – 36) numbers.
+            try
+            {
+                Console.Write("Enter 1 to bet low(1-18); enter 2 to bet high(19-36): ");
+                var stringNumber = Console.ReadLine();
+                var intNumber = 0;
+                if (stringNumber == "1")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber >=1 && intNumber <= 18)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
 
+                else if (stringNumber == "2")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber >= 19 && intNumber <= 36)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter either 1 or 2.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter either 1 or 2.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
         }
-        public void DozensBet()
+        static public void DozensBet()
         {
             //Dozens: row thirds, 1 – 12, 13 – 24, 25 – 36
+            try
+            {
+                Console.Write("Enter 1 to bet the first third(1-12); enter 2 to bet the second third(13-24); enter 3 to bet the last third(25-36): ");
+                var stringNumber = Console.ReadLine();
+                var intNumber = 0;
+                if (stringNumber == "1")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber >= 1 && intNumber <= 12)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else if (stringNumber == "2")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber >= 13 && intNumber <= 24)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
 
+                else if (stringNumber == "3")
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    if (intNumber >= 25 && intNumber <= 36)
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter either 1, 2, or 3.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter either 1, 2, or 3.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
         }
         public void ColumnsBet()
         {

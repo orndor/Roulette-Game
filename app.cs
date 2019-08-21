@@ -6,7 +6,11 @@ namespace Roulette_Game
     {
         public void Run()
         {
-            Bet.NumbersBet();
+            //Bet.NumbersBet();
+            //Bet.EvensAndOddsBet();
+            //Bet.RedsAndBlacksBet();
+            //Bet.LowsAndHighsBet();
+            Bet.DozensBet();
         }
 
     }
