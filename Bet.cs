@@ -264,9 +264,81 @@ namespace Roulette_Game
                 Console.WriteLine("Please select a bet.");
             }
         }
-        public void ColumnsBet()
+        static public void ColumnsBet()
         {
             //Columns: first, second, or third columns
+
+            try
+            {
+                Console.Write("Enter 1 to bet the first column; enter 2 to bet the second column; enter 3 to bet the third column: ");
+                int[] column = new int[12];
+                var intNumber = 0;
+                var consoleNumber = int.Parse(Console.ReadLine());
+                if (consoleNumber == 1)
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    column.SetValue(1, 0);
+                    for (int i = 0; i < column.Length-1; i++)
+                    {
+                        column[i+1] = column[i] + 3;
+                    }
+                    if (Array.Exists(column, num => num == intNumber))
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else if (consoleNumber == 2)
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    column.SetValue(2, 0);
+                    for (int i = 0; i < column.Length - 1; i++)
+                    {
+                        column[i + 1] = column[i] + 3;
+                    }
+                    if (Array.Exists(column, num => num == intNumber))
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+
+                else if (consoleNumber == 3)
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    column.SetValue(3, 0);
+                    for (int i = 0; i < column.Length - 1; i++)
+                    {
+                        column[i + 1] = column[i] + 3;
+                    }
+                    if (Array.Exists(column, num => num == intNumber))
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter either 1, 2, or 3.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter either 1, 2, or 3.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
 
         }
         public void StreetBet()

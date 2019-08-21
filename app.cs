@@ -10,7 +10,8 @@ namespace Roulette_Game
             //Bet.EvensAndOddsBet();
             //Bet.RedsAndBlacksBet();
             //Bet.LowsAndHighsBet();
-            Bet.DozensBet();
+            //Bet.DozensBet();
+            Bet.ColumnsBet();
         }
 
     }
