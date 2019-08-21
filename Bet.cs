@@ -274,48 +274,13 @@ namespace Roulette_Game
                 int[] column = new int[12];
                 var intNumber = 0;
                 var consoleNumber = int.Parse(Console.ReadLine());
-                if (consoleNumber == 1)
+                if (consoleNumber >=1 && consoleNumber <= 3)
                 {
                     intNumber = RouletteWheel.Spin().Item1;
-                    column.SetValue(1, 0);
+                    column.SetValue(consoleNumber, 0);
                     for (int i = 0; i < column.Length-1; i++)
                     {
                         column[i+1] = column[i] + 3;
-                    }
-                    if (Array.Exists(column, num => num == intNumber))
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else if (consoleNumber == 2)
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    column.SetValue(2, 0);
-                    for (int i = 0; i < column.Length - 1; i++)
-                    {
-                        column[i + 1] = column[i] + 3;
-                    }
-                    if (Array.Exists(column, num => num == intNumber))
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-
-                else if (consoleNumber == 3)
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    column.SetValue(3, 0);
-                    for (int i = 0; i < column.Length - 1; i++)
-                    {
-                        column[i + 1] = column[i] + 3;
                     }
                     if (Array.Exists(column, num => num == intNumber))
                     {
@@ -341,10 +306,56 @@ namespace Roulette_Game
             }
 
         }
-        public void StreetBet()
+        static public void StreetBet()
         {
             //Street: rows, e.g., 1/2/3 or 22/23/24
-
+            try
+            {
+                Console.WriteLine("Enter 1 to bet the last street (1,2,3): ");
+                Console.WriteLine("Enter 2 to bet the last street (4,5,6): ");
+                Console.WriteLine("Enter 3 to bet the last street (7,8,9): ");
+                Console.WriteLine("Enter 4 to bet the last street (10,11,12): ");
+                Console.WriteLine("Enter 5 to bet the last street (13,14,15): ");
+                Console.WriteLine("Enter 6 to bet the last street (16,17,18): ");
+                Console.WriteLine("Enter 7 to bet the last street (19,20,21): ");
+                Console.WriteLine("Enter 8 to bet the last street (22,23,24): ");
+                Console.WriteLine("Enter 9 to bet the last street (25,26,27): ");
+                Console.WriteLine("Enter 10 to bet the last street (28,29,30): ");
+                Console.WriteLine("Enter 11 to bet the last street (31,32,33): ");
+                Console.WriteLine("Enter 12 to bet the last street (34,35,36): ");
+                int[] column = new int[3];
+                var intNumber = 0;
+                var consoleNumber = int.Parse(Console.ReadLine());
+                if (consoleNumber >=1 && consoleNumber <=12)
+                {
+                    intNumber = RouletteWheel.Spin().Item1;
+                    column.SetValue(consoleNumber, 0);
+                    for (int i = 0; i < column.Length - 1; i++)
+                    {
+                        column[i + 1] = column[i] + 1;
+                    }
+                    if (Array.Exists(column, num => num == intNumber))
+                    {
+                        Console.WriteLine("You won!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, you lost.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter number from 1 to 12.");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Please enter number from 1 to 12.");
+            }
+            finally
+            {
+                Console.WriteLine("Please select a bet.");
+            }
         }
         public void SixNumbersBet()
         {
