@@ -379,7 +379,7 @@ namespace Roulette_Game
                 }
                 else if (randomNumber >= 4 && randomNumber <= 33)
                 {
-                    int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0);
+                    int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0) - 1;
                     int startingRow = rowNumber - 1;
                     int endingRow = rowNumber + 1;
                     Console.WriteLine($"Double row numbers {numbersBoard[startingRow, 0]} through {numbersBoard[rowNumber, 2]} won.");
@@ -396,10 +396,81 @@ namespace Roulette_Game
                 Console.WriteLine("Something went wrong...");
             }
         }
-        public void SplitBet()
+        static public void SplitBet(int randomNumber)
         {
             //Split: at the edge of any two contiguous numbers, e.g., 1/2, 11/14, and 35/36
-
+            //populate the game board into an array
+            int[,] numbersBoard = new int[12, 3];
+            int counter = 1;
+            for (int row = 0; row < 12; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    numbersBoard[row, col] = counter;
+                    counter++;
+                }
+            }
+            int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0) - 1;
+            if (numbersBoard[rowNumber, 0] == randomNumber)
+            {
+                if (randomNumber == 1)
+                {
+                    Console.WriteLine("Split bet 1 and 2 won.");
+                    Console.WriteLine("Split bet 1 and 4 won.");
+                }
+                else if (randomNumber == 34)
+                {
+                    Console.WriteLine("Split bet 34 and 35 won.");
+                    Console.WriteLine("Split bet 34 and 31 won.");
+                }
+                else
+                {
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber - 1, 0]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber + 1, 0]} won.");
+                }
+            }
+            if (numbersBoard[rowNumber, 1] == randomNumber)
+            {
+                if (randomNumber == 2)
+                {
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]} won.");
+                }
+                else if (randomNumber == 35)
+                {
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
+                }
+                else
+                {
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]} won.");
+                }
+            }
+            if (numbersBoard[rowNumber, 2] == randomNumber)
+            {
+                if (randomNumber == 3)
+                {
+                    Console.WriteLine("Split bet 2 and 3 won.");
+                    Console.WriteLine("Split bet 3 and 6 won.");
+                }
+                else if (randomNumber == 36)
+                {
+                    Console.WriteLine("Split bet 33 and 36 won.");
+                    Console.WriteLine("Split bet 35 and 36 won.");
+                }
+                else
+                {
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber - 1, 2]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber + 1, 2]} won.");
+                }
+            }
         }
         public void CornerBet()
         {

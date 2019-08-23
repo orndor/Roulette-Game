@@ -21,6 +21,7 @@ namespace Roulette_Game
             var wheeleNumber = spinResults.Item3;
 
             Bet.SixNumbersBet(randomNumber);
+            Bet.SplitBet(randomNumber);
         }
 
     }
