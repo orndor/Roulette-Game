@@ -13,6 +13,14 @@ namespace Roulette_Game
             //Bet.DozensBet();
             //Bet.ColumnsBet();
             //Bet.StreetBet();
+
+            var spinResults = RouletteWheel.Spin();
+
+            var randomNumber = spinResults.Item1;
+            var color = spinResults.Item2;
+            var wheeleNumber = spinResults.Item3;
+
+            Bet.SixNumbersBet(randomNumber);
         }
 
     }

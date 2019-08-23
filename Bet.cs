@@ -357,10 +357,44 @@ namespace Roulette_Game
                 Console.WriteLine("Please select a bet.");
             }
         }
-        public void SixNumbersBet()
+        static public void SixNumbersBet(int randomNumber)
         {
             //6 Numbers: double rows, e.g., 1/2/3/4/5/6 or 22/23/24/25/26/26
-
+            try
+            {
+                //populate the game board into an array
+                int[,] numbersBoard = new int[12, 3];
+                int counter = 1;
+                for (int row = 0; row < 12; row++)
+                {
+                    for (int col = 0; col < 3; col++)
+                    {
+                        numbersBoard[row, col] = counter;
+                        counter++;
+                    }
+                }
+                if (randomNumber >= 1 && randomNumber <= 3)
+                {
+                    Console.WriteLine("Double row number 1 through 6 Won.");
+                }
+                else if (randomNumber >= 4 && randomNumber <= 33)
+                {
+                    int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0);
+                    int startingRow = rowNumber - 1;
+                    int endingRow = rowNumber + 1;
+                    Console.WriteLine($"Double row numbers {numbersBoard[startingRow, 0]} through {numbersBoard[rowNumber, 2]} won.");
+                    Console.WriteLine($"Double row numbers {numbersBoard[rowNumber, 0]} through {numbersBoard[endingRow, 2]} won.");
+                }
+                else if (randomNumber >= 34 && randomNumber <= 36)
+                {
+                    Console.WriteLine("Double row numbers 31 through 36 Won.");
+                }
+                else {;}
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong...");
+            }
         }
         public void SplitBet()
         {
