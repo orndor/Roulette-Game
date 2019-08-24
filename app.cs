@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace Roulette_Game
 {
@@ -6,22 +6,35 @@ namespace Roulette_Game
     {
         public void Run()
         {
-            //Bet.NumbersBet();
-            //Bet.EvensAndOddsBet();
-            //Bet.RedsAndBlacksBet();
-            //Bet.LowsAndHighsBet();
-            //Bet.DozensBet();
-            //Bet.ColumnsBet();
-            //Bet.StreetBet();
+            do
+            {
+                Console.Clear();
+                var numbersBoard = GameBoard.GenerateGameBoard();
+                var spinResults = RouletteWheel.Spin();
+                var randomNumber = spinResults.Item1;
+                var color = spinResults.Item2;
+                var wheeleNumber = spinResults.Item3;
 
-            var spinResults = RouletteWheel.Spin();
+                System.Console.WriteLine("The following bets would have won:\n");
 
-            var randomNumber = spinResults.Item1;
-            var color = spinResults.Item2;
-            var wheeleNumber = spinResults.Item3;
+                Bet.NumbersBet(wheeleNumber);
+                Bet.EvensAndOddsBet(randomNumber);
 
-            Bet.SixNumbersBet(randomNumber);
-            Bet.SplitBet(randomNumber);
+                //If you roll a '00' or '0' don't even bother running the other bets that can't win.
+                if (randomNumber != 37 && randomNumber != 0)
+                {
+                    Bet.RedsAndBlacksBet(color);
+                    Bet.LowsAndHighsBet(randomNumber);
+                    Bet.DozensBet(randomNumber);
+                    Bet.ColumnsBet(randomNumber, numbersBoard);
+                    Bet.StreetBet(randomNumber, numbersBoard);
+                    Bet.SixNumbersBet(randomNumber, numbersBoard);
+                    Bet.SplitBet(randomNumber, numbersBoard);
+                    Bet.CornerBet(randomNumber, numbersBoard);
+                }
+                Console.WriteLine("\n\nHit Space Bar to play again...");
+            } while (Console.ReadKey().Key == ConsoleKey.Spacebar);
+
         }
 
     }

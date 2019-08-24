@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Roulette_Game
 {
@@ -56,7 +55,7 @@ namespace Roulette_Game
             var randomNumber = random.Next(0, 38);
             var color = rouletteWheel[randomNumber].Item1;
             var number = rouletteWheel[randomNumber].Item2;
-            Console.WriteLine($"The ball stopped on {color} {number}.");
+            Console.WriteLine($"The ball stopped on {color} {number}.\n");
 
             return new Tuple<int, string, string>(randomNumber, color, number);
         }

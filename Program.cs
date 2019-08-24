@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Roulette_Game
+﻿namespace Roulette_Game
 {
     class Program
     {

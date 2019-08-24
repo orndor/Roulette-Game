@@ -1,369 +1,97 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Roulette_Game
 {
     class Bet
     {
-        public void SelectBet()
+        static public void NumbersBet(string wheelNumber)
         {
-            Console.WriteLine("Valid Bets:");
-            Console.WriteLine("1. Numbers: the number of the bin.");
-            Console.WriteLine("2. Evens/Odds: even or odd numbers");
-            Console.WriteLine("3. Reds/Blacks: red or black colored numbers");
-            Console.WriteLine("4. Lows/Highs: low (1 – 18) or high (19 – 38) numbers.");
-            Console.WriteLine("5. Dozens: row thirds, 1 – 12, 13 – 24, 25 – 36");
-            Console.WriteLine("6. Columns: first, second, or third columns");
-            Console.WriteLine("7. Street: rows, e.g., 1/2/3 or 22/23/24");
-            Console.WriteLine("8. 6 Numbers: double rows, e.g., 1/2/3/4/5/6 or 22/23/24/25/26/26");
-            Console.WriteLine("9. Split: at the edge of any two contiguous numbers, e.g., 1/2, 11/14, and 35/36");
-            Console.WriteLine("10. Corner: at the intersection of any four contiguous numbers, e.g., 1/2/4/5, or 23/24/26/27");
+            Console.WriteLine($"Number {wheelNumber}");
         }
-        static public void NumbersBet()
-        {
-            try
-            {
-                //Numbers: the number of the bin
-                Console.Write("Enter the number you wish to bet on: ");
-                var stringNumber = Console.ReadLine();
-                var intNumber = 0;
-                if (stringNumber == "00")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber == 37)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                }
-
-                else if (int.Parse(stringNumber) <= 36 && int.Parse(stringNumber) >= 0)
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    var number = int.Parse(stringNumber);
-                    if (intNumber == number)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a valid number between 00 and 36");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Please enter a valid number between 00 and 36");
-            }
-            finally
-            {
-                Console.WriteLine("Please select a bet.");
-            }
-
-        }
-        static public void EvensAndOddsBet()
+        static public void EvensAndOddsBet(int randomNumber)
         {
             //Evens/Odds: even or odd numbers
-            try
+            if (randomNumber % 2 == 0 && randomNumber != 37)
             {
-                Console.Write("Enter 1 to bet even; enter 2 to bet odd: ");
-                var stringNumber = Console.ReadLine();
-                var intNumber = 0;
-                if (stringNumber == "1")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber % 2 == 0)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-
-                else if (stringNumber == "2")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber % 3 == 0)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter either 1 or 2.");
-                }
+                Console.WriteLine("Evens/Odds bet (even)");
             }
-            catch
+            else if (randomNumber % 3 == 0 || randomNumber == 1 && randomNumber != 37)
             {
-                Console.WriteLine("Please enter either 1 or 2.");
-            }
-            finally
-            {
-                Console.WriteLine("Please select a bet.");
+                Console.WriteLine("Evens/Odds bet (odd)");
             }
         }
-        static public void RedsAndBlacksBet()
+        static public void RedsAndBlacksBet(string color)
         {
             //Reds/Blacks: red or black colored numbers
-            try
+            if (color == "Red")
             {
-                Console.Write("Enter 1 to bet red; enter 2 to bet black: ");
-                var stringNumber = Console.ReadLine();
-                if (stringNumber == "1")
-                {
-                    var color = RouletteWheel.Spin().Item2;
-                    if (color == "Red")
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-
-                else if (stringNumber == "2")
-                {
-                    var color = RouletteWheel.Spin().Item2;
-                    if (color == "Black")
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter either 1 or 2.");
-                }
+                Console.WriteLine("Red/Black bet (Red)");
             }
-            catch
+            else
             {
-                Console.WriteLine("Please enter either 1 or 2.");
-            }
-            finally
-            {
-                Console.WriteLine("Please select a bet.");
+                Console.WriteLine("Red/Black bet (Black)");
             }
         }
-        static public void LowsAndHighsBet()
+        static public void LowsAndHighsBet(int randomNumber)
         {
             //Lows/Highs: low (1 – 18) or high (19 – 36) numbers.
-            try
+            if (randomNumber >= 1 && randomNumber <= 18)
             {
-                Console.Write("Enter 1 to bet low(1-18); enter 2 to bet high(19-36): ");
-                var stringNumber = Console.ReadLine();
-                var intNumber = 0;
-                if (stringNumber == "1")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber >=1 && intNumber <= 18)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-
-                else if (stringNumber == "2")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber >= 19 && intNumber <= 36)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter either 1 or 2.");
-                }
+                Console.WriteLine("The first half (1-18)");
             }
-            catch
+            else
             {
-                Console.WriteLine("Please enter either 1 or 2.");
-            }
-            finally
-            {
-                Console.WriteLine("Please select a bet.");
+                Console.WriteLine("The second half (19-36)");
             }
         }
-        static public void DozensBet()
+        static public void DozensBet(int randomNumber)
         {
             //Dozens: row thirds, 1 – 12, 13 – 24, 25 – 36
-            try
+            if (randomNumber >= 1 && randomNumber <= 12)
             {
-                Console.Write("Enter 1 to bet the first third(1-12); enter 2 to bet the second third(13-24); enter 3 to bet the last third(25-36): ");
-                var stringNumber = Console.ReadLine();
-                var intNumber = 0;
-                if (stringNumber == "1")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber >= 1 && intNumber <= 12)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else if (stringNumber == "2")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber >= 13 && intNumber <= 24)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-
-                else if (stringNumber == "3")
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    if (intNumber >= 25 && intNumber <= 36)
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter either 1, 2, or 3.");
-                }
+                Console.WriteLine("The first 12 (1-12)");
             }
-            catch
+            else if (randomNumber >= 13 && randomNumber <= 24)
             {
-                Console.WriteLine("Please enter either 1, 2, or 3.");
+                Console.WriteLine("The second 12 (13-24)");
             }
-            finally
+            else
             {
-                Console.WriteLine("Please select a bet.");
+                Console.WriteLine("The third 12 (25-36)");
             }
         }
-        static public void ColumnsBet()
+        static public void ColumnsBet(int randomNumber, int[,] numbersBoard)
         {
             //Columns: first, second, or third columns
 
-            try
+            int rowNumber = GetRowNumber(randomNumber);
+            if (numbersBoard[rowNumber, 0] == randomNumber)
             {
-                Console.Write("Enter 1 to bet the first column; enter 2 to bet the second column; enter 3 to bet the third column: ");
-                int[] column = new int[12];
-                var intNumber = 0;
-                var consoleNumber = int.Parse(Console.ReadLine());
-                if (consoleNumber >=1 && consoleNumber <= 3)
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    column.SetValue(consoleNumber, 0);
-                    for (int i = 0; i < column.Length-1; i++)
-                    {
-                        column[i+1] = column[i] + 3;
-                    }
-                    if (Array.Exists(column, num => num == intNumber))
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter either 1, 2, or 3.");
-                }
+                Console.WriteLine($"Column 1 numbers (1, 4, 7, 10, 13, 16, 18, 22, 25, 28, 31, 34)");
             }
-            catch
+            else if (numbersBoard[rowNumber, 1] == randomNumber)
             {
-                Console.WriteLine("Please enter either 1, 2, or 3.");
+                Console.WriteLine($"Column 2 numbers (2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35)");
             }
-            finally
+            else
             {
-                Console.WriteLine("Please select a bet.");
+                Console.WriteLine($"Column 3 numbers (3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36)");
             }
 
         }
-        static public void StreetBet()
+        static public void StreetBet(int randomNumber, int[,] numbersBoard)
         {
             //Street: rows, e.g., 1/2/3 or 22/23/24
-            try
-            {
-                Console.WriteLine("Enter 1 to bet the last street (1,2,3): ");
-                Console.WriteLine("Enter 2 to bet the last street (4,5,6): ");
-                Console.WriteLine("Enter 3 to bet the last street (7,8,9): ");
-                Console.WriteLine("Enter 4 to bet the last street (10,11,12): ");
-                Console.WriteLine("Enter 5 to bet the last street (13,14,15): ");
-                Console.WriteLine("Enter 6 to bet the last street (16,17,18): ");
-                Console.WriteLine("Enter 7 to bet the last street (19,20,21): ");
-                Console.WriteLine("Enter 8 to bet the last street (22,23,24): ");
-                Console.WriteLine("Enter 9 to bet the last street (25,26,27): ");
-                Console.WriteLine("Enter 10 to bet the last street (28,29,30): ");
-                Console.WriteLine("Enter 11 to bet the last street (31,32,33): ");
-                Console.WriteLine("Enter 12 to bet the last street (34,35,36): ");
-                int[] column = new int[3];
-                var intNumber = 0;
-                var consoleNumber = int.Parse(Console.ReadLine());
-                if (consoleNumber >=1 && consoleNumber <=12)
-                {
-                    intNumber = RouletteWheel.Spin().Item1;
-                    column.SetValue(consoleNumber, 0);
-                    for (int i = 0; i < column.Length - 1; i++)
-                    {
-                        column[i + 1] = column[i] + 1;
-                    }
-                    if (Array.Exists(column, num => num == intNumber))
-                    {
-                        Console.WriteLine("You won!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, you lost.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Please enter number from 1 to 12.");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Please enter number from 1 to 12.");
-            }
-            finally
-            {
-                Console.WriteLine("Please select a bet.");
-            }
+            int rowNumber = GetRowNumber(randomNumber);
+
+            Console.WriteLine($"Street bet numbers {numbersBoard[rowNumber, 0]} through {numbersBoard[rowNumber, 2]}");
+
         }
-        static public void SixNumbersBet(int randomNumber)
+        static public void SixNumbersBet(int randomNumber, int[,] numbersBoard)
         {
             //6 Numbers: double rows, e.g., 1/2/3/4/5/6 or 22/23/24/25/26/26
             try
             {
-                //populate the game board into an array
-                int[,] numbersBoard = new int[12, 3];
                 int counter = 1;
                 for (int row = 0; row < 12; row++)
                 {
@@ -375,107 +103,158 @@ namespace Roulette_Game
                 }
                 if (randomNumber >= 1 && randomNumber <= 3)
                 {
-                    Console.WriteLine("Double row number 1 through 6 Won.");
+                    Console.WriteLine("Double row number 1 through 6");
                 }
                 else if (randomNumber >= 4 && randomNumber <= 33)
                 {
-                    int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0) - 1;
+                    int rowNumber = GetRowNumber(randomNumber);
                     int startingRow = rowNumber - 1;
                     int endingRow = rowNumber + 1;
-                    Console.WriteLine($"Double row numbers {numbersBoard[startingRow, 0]} through {numbersBoard[rowNumber, 2]} won.");
-                    Console.WriteLine($"Double row numbers {numbersBoard[rowNumber, 0]} through {numbersBoard[endingRow, 2]} won.");
+                    Console.WriteLine($"Double row numbers {numbersBoard[startingRow, 0]} through {numbersBoard[rowNumber, 2]}");
+                    Console.WriteLine($"Double row numbers {numbersBoard[rowNumber, 0]} through {numbersBoard[endingRow, 2]}");
                 }
                 else if (randomNumber >= 34 && randomNumber <= 36)
                 {
-                    Console.WriteLine("Double row numbers 31 through 36 Won.");
+                    Console.WriteLine("Double row numbers 31 through 36");
                 }
-                else {;}
+                else {; }
             }
             catch
             {
                 Console.WriteLine("Something went wrong...");
             }
         }
-        static public void SplitBet(int randomNumber)
+        static public void SplitBet(int randomNumber, int[,] numbersBoard)
         {
             //Split: at the edge of any two contiguous numbers, e.g., 1/2, 11/14, and 35/36
-            //populate the game board into an array
-            int[,] numbersBoard = new int[12, 3];
-            int counter = 1;
-            for (int row = 0; row < 12; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    numbersBoard[row, col] = counter;
-                    counter++;
-                }
-            }
-            int rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0) - 1;
+            int rowNumber = GetRowNumber(randomNumber);
             if (numbersBoard[rowNumber, 0] == randomNumber)
             {
                 if (randomNumber == 1)
                 {
-                    Console.WriteLine("Split bet 1 and 2 won.");
-                    Console.WriteLine("Split bet 1 and 4 won.");
+                    Console.WriteLine("Split bet 1 and 2");
+                    Console.WriteLine("Split bet 1 and 4");
                 }
                 else if (randomNumber == 34)
                 {
-                    Console.WriteLine("Split bet 34 and 35 won.");
-                    Console.WriteLine("Split bet 34 and 31 won.");
+                    Console.WriteLine("Split bet 34 and 35");
+                    Console.WriteLine("Split bet 34 and 31");
                 }
                 else
                 {
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber - 1, 0]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber, 1]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber + 1, 0]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber - 1, 0]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber, 1]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 0]} and {numbersBoard[rowNumber + 1, 0]}");
                 }
             }
             if (numbersBoard[rowNumber, 1] == randomNumber)
             {
                 if (randomNumber == 2)
                 {
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]}");
                 }
                 else if (randomNumber == 35)
                 {
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]}");
                 }
                 else
                 {
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber - 1, 1]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 0]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber, 2]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 1]} and {numbersBoard[rowNumber + 1, 1]}");
                 }
             }
             if (numbersBoard[rowNumber, 2] == randomNumber)
             {
                 if (randomNumber == 3)
                 {
-                    Console.WriteLine("Split bet 2 and 3 won.");
-                    Console.WriteLine("Split bet 3 and 6 won.");
+                    Console.WriteLine("Split bet 3 and 2");
+                    Console.WriteLine("Split bet 3 and 6");
                 }
                 else if (randomNumber == 36)
                 {
-                    Console.WriteLine("Split bet 33 and 36 won.");
-                    Console.WriteLine("Split bet 35 and 36 won.");
+                    Console.WriteLine("Split bet 36 and 33");
+                    Console.WriteLine("Split bet 36 and 35");
                 }
                 else
                 {
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber - 1, 2]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber, 1]} won.");
-                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber + 1, 2]} won.");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber - 1, 2]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber, 1]}");
+                    Console.WriteLine($"Split bet {numbersBoard[rowNumber, 2]} and {numbersBoard[rowNumber + 1, 2]}");
                 }
             }
         }
-        public void CornerBet()
+        static public void CornerBet(int randomNumber, int[,] numbersBoard)
         {
             //Corner: at the intersection of any four contiguous numbers, e.g., 1/2/4/5, or 23/24/26/27
+            int rowNumber = GetRowNumber(randomNumber);
+            if (numbersBoard[rowNumber, 0] == randomNumber)
+            {
+                if (randomNumber == 1)
+                {
+                    Console.WriteLine("Corner bet 1, 2, 4, and 5");
+                }
+                else if (randomNumber == 34)
+                {
+                    Console.WriteLine("Corner bet 34, 31, 32, and 35");
+                }
+                else
+                {
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 0]}, {numbersBoard[rowNumber, 0] - 3}, {numbersBoard[rowNumber, 0] - 2}, and {numbersBoard[rowNumber, 0] + 1}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 0]}, {numbersBoard[rowNumber, 0] + 1}, {numbersBoard[rowNumber, 0] + 3}, and {numbersBoard[rowNumber, 0] + 4}");
+                }
+            }
+            if (numbersBoard[rowNumber, 1] == randomNumber)
+            {
+                if (randomNumber == 2)
+                {
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 1}, {numbersBoard[rowNumber, 1] + 2}, and {numbersBoard[rowNumber, 1] + 3}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] + 1}, {numbersBoard[rowNumber, 1] + 3}, and {numbersBoard[rowNumber, 1] + 4}");
+                }
+                else if (randomNumber == 35)
+                {
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 4}, {numbersBoard[rowNumber, 1] - 3}, and {numbersBoard[rowNumber, 1] - 1}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 3}, {numbersBoard[rowNumber, 1] - 2}, and {numbersBoard[rowNumber, 1] + 1}");
+                }
+                else
+                {
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 4}, {numbersBoard[rowNumber, 1] - 3}, and {numbersBoard[rowNumber, 1] - 1}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 3}, {numbersBoard[rowNumber, 1] - 2}, and {numbersBoard[rowNumber, 1] + 1}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] - 1}, {numbersBoard[rowNumber, 1] + 2}, and {numbersBoard[rowNumber, 1] + 3}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 1]}, {numbersBoard[rowNumber, 1] + 1}, {numbersBoard[rowNumber, 1] + 3}, and {numbersBoard[rowNumber, 1] + 4}");
+                }
+            }
+            if (numbersBoard[rowNumber, 2] == randomNumber)
+            {
+                if (randomNumber == 3)
+                {
+                    Console.WriteLine("Corner bet 3, 2, 5, and 6");
+                }
+                else if (randomNumber == 36)
+                {
+                    Console.WriteLine("Corner bet 36, 32, 33, and 35");
+                }
+                else
+                {
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 2]}, {numbersBoard[rowNumber, 2] - 4}, {numbersBoard[rowNumber, 2] - 3}, and {numbersBoard[rowNumber, 2] - 1}");
+                    Console.WriteLine($"Corner bet {numbersBoard[rowNumber, 2]}, {numbersBoard[rowNumber, 2] - 1}, {numbersBoard[rowNumber, 2] + 2}, and {numbersBoard[rowNumber, 2] + 3}");
+                }
+            }
+        }
 
+        static private int GetRowNumber(int randomNumber)
+        {
+            int rowNumber = 0;
+            if(randomNumber > 0)
+            {
+                rowNumber = (int)Math.Ceiling((double)randomNumber / 3.0) - 1;
+            }
+            return rowNumber;
         }
     }
 }
